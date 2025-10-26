@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* आपके पूरे ऐप के लिए डार्क मोड बैकग्राउंड और फॉन्ट */
+body {
+    /* dark-bg: #0f172a (Tailwind's slate-900) */
+    background-color: #0f172a; 
+    color: white;
+    font-family: 'Inter', sans-serif;
+    
+    /* CUSTOM CURSOR STYLING:
+       यह डिफ़ॉल्ट कर्सर को छुपाता है ताकि केवल हमारी एनिमेटेड बॉल दिखे। */
+    cursor: none; 
+}
+
+/* अगर आप चाहते हैं कि लिंक्स/बटनों पर होवर करने पर डिफ़ॉल्ट कर्सर वापस आ जाए (UX के लिए अच्छा) */
+/*
+   IMPORTANT: चूँकि हम CursorFollower.tsx में इंटरैक्टिव एलिमेंट्स को ट्रैक कर रहे हैं,
+   इसलिए यहां 'cursor: default' का उपयोग करना ज़रूरी नहीं है, और यह भ्रम पैदा कर सकता है।
+   हम इस ब्लॉक को हटाकर केवल CSS को साफ रखेंगे, और कर्सर का व्यवहार पूरी तरह से
+   CursorFollower.tsx में नियंत्रित करेंगे।
+*/
+a, 
+button, 
+[role="button"], 
+input, 
+textarea, 
+select,
+.cursor-pointer {
+    /* हम इन सभी एलिमेंट्स से डिफ़ॉल्ट कर्सर हटा रहे हैं ताकि बॉल कर्सर काम करे */
+    cursor: none !important; 
+}
+
+
+/* कुछ सामान्य CSS वेरिएबल्स (यदि आवश्यक हो तो) */
+:root {
+    /* Primary Blue (approx tailwind blue-500) */
+    --color-primary-blue: #3b82f6; 
+    /* Accent Purple (approx tailwind purple-500) */
+    --color-accent-purple: #a855f7; 
+}
