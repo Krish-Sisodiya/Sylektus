@@ -8,7 +8,7 @@ interface MousePosition {
 
 const CursorFollower: React.FC = () => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false); // माउस विंडो के अंदर है या नहीं
+  const [isHovering, setIsHovering] = useState(false);
   const [isInteractive, setIsInteractive] = useState(false); 
   
   const defaultSize = 10;
@@ -17,50 +17,42 @@ const CursorFollower: React.FC = () => {
   const size = isInteractive ? interactiveSize : defaultSize;
   const opacity = isHovering ? 1 : 0; 
   
-  const hideTimeout = React.useRef<NodeJS.Timeout | undefined>(undefined);
+  // ✅ Updated: NodeJS.Timeout replaced
+  const hideTimeout = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      // माउस मूव करते ही तुरंत दिखाओ
       setIsHovering(true);
 
-      // इंटरैक्टिव एलिमेंट्स को ट्रैक करें
       const target = e.target as HTMLElement;
-      const isOverInteractive = target.tagName === 'A' || target.tagName === 'BUTTON' || target.getAttribute('role') === 'button' || target.classList.contains('cursor-pointer');
+      const isOverInteractive =
+        target.tagName === 'A' ||
+        target.tagName === 'BUTTON' ||
+        target.getAttribute('role') === 'button' ||
+        target.classList.contains('cursor-pointer');
       setIsInteractive(isOverInteractive);
 
-      // 500ms के बाद माउस रुकने पर बॉल को छिपाने का टाइमर रीसेट करो
       clearTimeout(hideTimeout.current);
       hideTimeout.current = setTimeout(() => {
-        setIsHovering(false); // 500ms बाद, अगर कोई और मूव इवेंट नहीं आया, तो छिपाओ
+        setIsHovering(false);
       }, 500); 
     };
     
-    // NEW: माउस विंडो से बाहर निकलने पर कर्सर को छिपाओ
-    const handleMouseLeave = () => {
-        setIsHovering(false);
-    };
-
-    // NEW: माउस विंडो में वापस आने पर कर्सर को दिखाओ
-    const handleMouseEnter = () => {
-        setIsHovering(true);
-    };
+    const handleMouseLeave = () => setIsHovering(false);
+    const handleMouseEnter = () => setIsHovering(true);
 
     window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseleave', handleMouseLeave); // <-- Added
-    window.addEventListener('mouseenter', handleMouseEnter); // <-- Added
+    window.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('mouseenter', handleMouseEnter);
     
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('mouseenter', handleMouseEnter);
-      if (hideTimeout.current) {
-        clearTimeout(hideTimeout.current);
-      }
+      if (hideTimeout.current) clearTimeout(hideTimeout.current);
     };
-  }, []); // Dependecy array is empty
+  }, []);
 
   return (
     <motion.div
@@ -76,12 +68,7 @@ const CursorFollower: React.FC = () => {
         opacity: opacity,
         scale: isInteractive ? 1.1 : 1,
       }}
-      transition={{ 
-        type: 'spring', 
-        stiffness: 400, 
-        damping: 30,  
-        mass: 0.2,    
-      }}
+      transition={{ type: 'spring', stiffness: 400, damping: 30, mass: 0.2 }}
     />
   );
 };

@@ -2,25 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-/* आपके पूरे ऐप के लिए डार्क मोड बैकग्राउंड और फॉन्ट */
+/* |--------------------------------------------------------------------------
+| 💎 PROFESSIONAL COLOR PALETTE (Deep Teal & Soft Gold/Amber)
+|--------------------------------------------------------------------------
+*/
+
+/* CSS Variables for Easy Management */
+:root {
+    /* Background: Deep Navy Blue / Near Black - For a premium dark feel */
+    --color-dark-bg: #0A192F; 
+    /* Card/Secondary Background: Slightly lighter than BG */
+    --color-dark-card: #112240; 
+    
+    /* Primary Color: Deep Teal/Green - Represents Trust, Growth, and Modernity */
+    --color-primary: #00A389; 
+    
+    /* Accent Color: Soft Gold/Amber - High contrast, luxury highlight, focus items */
+    --color-accent: #FFC107; 
+    
+    /* Text/Secondary Text (Gray/Light Gray) */
+    --color-text-light: #ccd6f6;
+    --color-text-darker: #8892b0;
+}
+
+/* Base Styles (Applying New Colors) */
 body {
-    /* dark-bg: #0f172a (Tailwind's slate-900) */
-    background-color: #0f172a; 
-    color: white;
+    /* Apply the new deep navy background */
+    background-color: var(--color-dark-bg); 
+    color: var(--color-text-light); /* Light text on dark background */
     font-family: 'Inter', sans-serif;
     
-    /* CUSTOM CURSOR STYLING:
-       यह डिफ़ॉल्ट कर्सर को छुपाता है ताकि केवल हमारी एनिमेटेड बॉल दिखे। */
+    /* Custom Cursor */
     cursor: none; 
 }
 
-/* अगर आप चाहते हैं कि लिंक्स/बटनों पर होवर करने पर डिफ़ॉल्ट कर्सर वापस आ जाए (UX के लिए अच्छा) */
-/*
-   IMPORTANT: चूँकि हम CursorFollower.tsx में इंटरैक्टिव एलिमेंट्स को ट्रैक कर रहे हैं,
-   इसलिए यहां 'cursor: default' का उपयोग करना ज़रूरी नहीं है, और यह भ्रम पैदा कर सकता है।
-   हम इस ब्लॉक को हटाकर केवल CSS को साफ रखेंगे, और कर्सर का व्यवहार पूरी तरह से
-   CursorFollower.tsx में नियंत्रित करेंगे।
-*/
+/* Reset cursor for interactive elements (for cleaner ball cursor control) */
 a, 
 button, 
 [role="button"], 
@@ -28,15 +44,30 @@ input,
 textarea, 
 select,
 .cursor-pointer {
-    /* हम इन सभी एलिमेंट्स से डिफ़ॉल्ट कर्सर हटा रहे हैं ताकि बॉल कर्सर काम करे */
     cursor: none !important; 
 }
 
-
-/* कुछ सामान्य CSS वेरिएबल्स (यदि आवश्यक हो तो) */
-:root {
-    /* Primary Blue (approx tailwind blue-500) */
-    --color-primary-blue: #3b82f6; 
-    /* Accent Purple (approx tailwind purple-500) */
-    --color-accent-purple: #a855f7; 
-}
+/* |--------------------------------------------------------------------------
+| 🚨 IMPORTANT: Tailwind Configuration
+|--------------------------------------------------------------------------
+|
+| भाई, आपको इन नए कलर्स को Tailwind CSS में भी रजिस्टर करना होगा। 
+| अपनी `tailwind.config.js` फ़ाइल को ऐसे अपडेट करें:
+|
+| module.exports = {
+|   theme: {
+|     extend: {
+|       colors: {
+|         'dark-bg': 'var(--color-dark-bg)',
+|         'dark-card': 'var(--color-dark-card)',
+|         'primary-teal': 'var(--color-primary)', // New Primary Color
+|         'accent-gold': 'var(--color-accent)', // New Accent Color
+|         'gray-light': 'var(--color-text-light)',
+|         'gray-darker': 'var(--color-text-darker)',
+|       }
+|     }
+|   }
+| }
+|
+| और फिर अपने React कंपोनेंट्स में `primary-blue` को `primary-teal` और `accent-purple` को `accent-gold` से बदल दें।
+*/
