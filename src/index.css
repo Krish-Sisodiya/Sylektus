@@ -2,72 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* |--------------------------------------------------------------------------
-| 💎 PROFESSIONAL COLOR PALETTE (Deep Teal & Soft Gold/Amber)
-|--------------------------------------------------------------------------
-*/
-
-/* CSS Variables for Easy Management */
+/* ✅ FINAL PORTFOLIO COLOR PALETTE */
 :root {
-    /* Background: Deep Navy Blue / Near Black - For a premium dark feel */
-    --color-dark-bg: #0A192F; 
-    /* Card/Secondary Background: Slightly lighter than BG */
-    --color-dark-card: #112240; 
-    
-    /* Primary Color: Deep Teal/Green - Represents Trust, Growth, and Modernity */
-    --color-primary: #00A389; 
-    
-    /* Accent Color: Soft Gold/Amber - High contrast, luxury highlight, focus items */
-    --color-accent: #FFC107; 
-    
-    /* Text/Secondary Text (Gray/Light Gray) */
-    --color-text-light: #ccd6f6;
-    --color-text-darker: #8892b0;
+    --color-dark-bg: #0a0f1f;      /* Background */
+    --color-dark-card: #111a2b;    /* Cards */
+    --color-primary: #0057ff;      /* Primary Blue */
+    --color-accent: #f6c453;       /* Accent Gold */
+
+    --color-text-light: #e6f1ff;   /* White Text */
+    --color-text-darker: #8892b0;  /* Gray Text */
 }
 
-/* Base Styles (Applying New Colors) */
 body {
-    /* Apply the new deep navy background */
-    background-color: var(--color-dark-bg); 
-    color: var(--color-text-light); /* Light text on dark background */
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-light);
     font-family: 'Inter', sans-serif;
-    
-    /* Custom Cursor */
-    cursor: none; 
+    cursor: none;
 }
 
-/* Reset cursor for interactive elements (for cleaner ball cursor control) */
-a, 
-button, 
-[role="button"], 
-input, 
-textarea, 
+a,
+button,
+input,
 select,
-.cursor-pointer {
-    cursor: none !important; 
+textarea {
+    cursor: none !important;
 }
-
-/* |--------------------------------------------------------------------------
-| 🚨 IMPORTANT: Tailwind Configuration
-|--------------------------------------------------------------------------
-|
-| भाई, आपको इन नए कलर्स को Tailwind CSS में भी रजिस्टर करना होगा। 
-| अपनी `tailwind.config.js` फ़ाइल को ऐसे अपडेट करें:
-|
-| module.exports = {
-|   theme: {
-|     extend: {
-|       colors: {
-|         'dark-bg': 'var(--color-dark-bg)',
-|         'dark-card': 'var(--color-dark-card)',
-|         'primary-teal': 'var(--color-primary)', // New Primary Color
-|         'accent-gold': 'var(--color-accent)', // New Accent Color
-|         'gray-light': 'var(--color-text-light)',
-|         'gray-darker': 'var(--color-text-darker)',
-|       }
-|     }
-|   }
-| }
-|
-| और फिर अपने React कंपोनेंट्स में `primary-blue` को `primary-teal` और `accent-purple` को `accent-gold` से बदल दें।
-*/
